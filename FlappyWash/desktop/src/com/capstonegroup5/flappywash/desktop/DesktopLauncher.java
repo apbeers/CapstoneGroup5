@@ -7,6 +7,9 @@ import com.capstonegroup5.flappywash.FlappyWash;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.width = FlappyWash.WIDTH;
+		config.height = FlappyWash.HEIGHT;
+		config.title = FlappyWash.TITLE;
 		new LwjglApplication(new FlappyWash(), config);
 	}
 }
