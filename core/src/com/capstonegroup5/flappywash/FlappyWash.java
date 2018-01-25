@@ -19,6 +19,8 @@ public class FlappyWash extends ApplicationAdapter {
 	private SpriteBatch batch;
 	Texture img;
 	// adjfksdaj i was here
+
+	// This is Nat
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
