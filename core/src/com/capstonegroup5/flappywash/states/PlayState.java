@@ -3,17 +3,18 @@ package com.capstonegroup5.flappywash.states;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.capstonegroup5.flappywash.FlappyWash;
+import com.capstonegroup5.flappywash.sprite.Bird;
 
 /**
  * Created by andrew on 2/1/18.
  */
 
 public class PlayState extends State {
-    private Texture bird;
+    private Bird bird;
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
-        bird = new Texture("bird.png");
+        bird = new Bird(50, 300);
         cam.setToOrtho(false, FlappyWash.WIDTH/2, FlappyWash.HEIGHT/2);
     }
 
@@ -24,6 +25,8 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
+        handleInput();
+        bird.update(dt);
 
     }
 
@@ -31,7 +34,7 @@ public class PlayState extends State {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(bird, 50, 50);
+        sb.draw(bird.getTexture(), bird.getPosition().x, bird.getPosition().y);
         sb.end();
     }
 
