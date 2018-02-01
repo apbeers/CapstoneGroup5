@@ -1,4 +1,4 @@
-package com.capstonegroup5.flappywash.States;
+package com.capstonegroup5.flappywash.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
