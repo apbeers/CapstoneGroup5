@@ -57,4 +57,9 @@ public class Bird {
     {
         return bounds;
     }
+
+    public void dispose()
+    {
+        bird.dispose();
+    }
 }
