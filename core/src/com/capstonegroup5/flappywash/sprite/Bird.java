@@ -12,6 +12,7 @@ import java.util.Vector;
 
 public class Bird {
     private static final int GRAVITY = -15;
+    private static final int MOVEMENT = 100;
     private Vector3 position;
     private Vector3 velocity;
 
@@ -27,6 +28,7 @@ public class Bird {
         if(position.y > 0)
             velocity.add(0, GRAVITY, 0);
         velocity.scl(dt);
+        position.add(MOVEMENT * dt, velocity.y,0);
         position.add(0, velocity.y, 0);
         if(position.y < 0)
             position.y = 0;
