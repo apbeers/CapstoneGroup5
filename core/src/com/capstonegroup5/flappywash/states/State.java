@@ -1,4 +1,4 @@
-package com.capstonegroup5.flappywash.States;
+package com.capstonegroup5.flappywash.states;
 
 /**
  * Created by andrew on 1/23/18.
@@ -15,7 +15,7 @@ public abstract class State {
     protected GameStateManager gsm;
 
     protected State(GameStateManager gsm) {
-        gsm = this.gsm;
+        this.gsm = gsm;
         cam = new OrthographicCamera();
         mouse = new Vector3();
     }
@@ -23,5 +23,6 @@ public abstract class State {
     protected abstract void handleInput();
     public abstract void update(float dt);
     public abstract void render(SpriteBatch sb);
+    public abstract void dispose();
 
 }
