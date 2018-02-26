@@ -17,11 +17,11 @@ public class TextureLoader {
 
     public TextureLoader() {
 
-        themes.add(new Theme(new Texture("bg1.png"), new Texture("ground.png")));
         themes.add(new Theme(new Texture("bg.png"), new Texture("ground.png")));
+        themes.add(new Theme(new Texture("bg1.png"), new Texture("ground.png")));
+        themes.add(new Theme(new Texture("bg2.png"), new Texture("ground.png")));
+        themes.add(new Theme(new Texture("bg3.png"), new Texture("ground.png")));
 
-        // nextInt is normally exclusive of the top value,
-        // so add 1 to make it inclusive
         themeIndex = new Random().nextInt((themes.size()));
     }
 
