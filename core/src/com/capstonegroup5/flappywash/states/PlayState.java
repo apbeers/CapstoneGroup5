@@ -18,6 +18,7 @@ public class PlayState extends State {
     private static final int TUBE_COUNT = 4;
     private static final int GROUND_Y_OFFSET = -50;
 
+    private TextureLoader textureLoader;
     private Bird bird;
     private Texture bg;
     private Texture ground;
@@ -29,8 +30,11 @@ public class PlayState extends State {
         super(gsm);
         bird = new Bird(50, 300);
         cam.setToOrtho(false, FlappyWash.WIDTH/2, FlappyWash.HEIGHT/2);
-        bg = new Texture("bg.png");
-        ground = new Texture("ground.png");
+
+        textureLoader = new TextureLoader();
+
+        bg = textureLoader.getBg();
+        ground = textureLoader.getGround();
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth /2, GROUND_Y_OFFSET);
         groundPos2 = new Vector2((cam.position.x - cam.viewportWidth /2) + ground.getWidth(), GROUND_Y_OFFSET);
 
