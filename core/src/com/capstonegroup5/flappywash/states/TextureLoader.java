@@ -17,16 +17,25 @@ public class TextureLoader {
 
     public TextureLoader() {
 
-        themes.add(new Theme(new Texture("bg.png"), new Texture("ground.png")));
-        themes.add(new Theme(new Texture("bg1.png"), new Texture("ground.png")));
-        themes.add(new Theme(new Texture("bg2.png"), new Texture("ground.png")));
-        themes.add(new Theme(new Texture("bg3.png"), new Texture("ground.png")));
+
+        themes.add(new Theme("bg.png", "ground.png"));
+        themes.add(new Theme("bg1.png", "ground.png"));
+        themes.add(new Theme("bg2.png","ground.png"));
+        themes.add(new Theme("bg3.png","ground.png"));
 
         themeIndex = new Random().nextInt((themes.size()));
     }
 
     public Texture getBg() {
         return themes.get(themeIndex).getBg();
+    }
+
+    public String getBgFilepath() {
+        return  themes.get(themeIndex).getBgPath();
+    }
+
+    public String getGroundFilepath() {
+        return themes.get(themeIndex).getGroundPath();
     }
 
     public Texture getGround() {

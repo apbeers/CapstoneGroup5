@@ -8,19 +8,27 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Theme {
 
-    private Texture bg;
-    private Texture ground;
+    private String bgPath;
+    private String groundPath;
 
-    public Theme(Texture bg, Texture ground) {
-        this.bg = bg;
-        this.ground = ground;
+    public Theme(String bgPath, String groundPath) {
+        this.bgPath = bgPath;
+        this.groundPath = groundPath;
     }
 
     public Texture getBg() {
-        return bg;
+        return new Texture(bgPath);
     }
 
     public Texture getGround() {
-        return ground;
+        return new Texture(groundPath);
+    }
+
+    public String getBgPath() {
+        return bgPath;
+    }
+
+    public String getGroundPath() {
+        return  groundPath;
     }
 }
