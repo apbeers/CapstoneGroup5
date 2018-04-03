@@ -2,12 +2,12 @@ package com.capstonegroup5.flappywash;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.capstonegroup5.flappywash.states.GameStateManager;
 import com.capstonegroup5.flappywash.states.MenuState;
-import com.badlogic.gdx.audio.Music;
 
 public class FlappyWash extends ApplicationAdapter {
 

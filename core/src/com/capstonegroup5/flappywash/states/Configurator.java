@@ -3,14 +3,9 @@ package com.capstonegroup5.flappywash.states;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.util.ArrayList;
-import java.util.Random;
-
-import io.keen.client.java.JavaKeenClientBuilder;
-import io.keen.client.java.KeenClient;
-import sun.security.krb5.Config;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import io.keen.client.java.JavaKeenClientBuilder;
 import io.keen.client.java.KeenClient;

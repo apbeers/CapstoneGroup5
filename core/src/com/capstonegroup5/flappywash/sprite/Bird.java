@@ -1,13 +1,11 @@
 package com.capstonegroup5.flappywash.sprite;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import java.awt.TextArea;
-import java.util.Vector;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.Gdx;
 import com.capstonegroup5.flappywash.states.Configurator;
 
 /**
