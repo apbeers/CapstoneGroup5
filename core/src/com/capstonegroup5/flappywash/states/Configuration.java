@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
  * Created by andrew on 2/26/18.
  */
 
-public class Theme {
+public class Configuration {
 
     private String bgPath;
     private String groundPath;
 
-    public Theme(String bgPath, String groundPath) {
+    public Configuration(String bgPath, String groundPath) {
         this.bgPath = bgPath;
         this.groundPath = groundPath;
     }
