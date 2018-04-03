@@ -21,8 +21,8 @@ import io.keen.client.java.KeenProject;
  */
 
 public class PlayState extends State {
-    private static final int TUBE_SPACING = 125;
-    private static final int TUBE_COUNT = 4;
+    private static int tubeSpacing;
+    private static int tubeCount;
     private static final int GROUND_Y_OFFSET = -50;
 
     KeenClient client = new JavaKeenClientBuilder().build();
@@ -48,6 +48,9 @@ public class PlayState extends State {
 
         starTime = System.currentTimeMillis();
 
+        tubeSpacing = configurator.getTubeSpacing();
+        tubeCount = configurator.getTubeCount();
+
         bg = configurator.getBg();
         ground = configurator.getGround();
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth /2, GROUND_Y_OFFSET);
@@ -55,9 +58,9 @@ public class PlayState extends State {
 
         tubes = new Array<Tube>();
 
-        for(int i = 1; i <= TUBE_COUNT; i++)
+        for(int i = 1; i <= tubeCount; i++)
         {
-            tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
+            tubes.add(new Tube(i * (tubeSpacing + Tube.TUBE_WIDTH)));
         }
     }
 
@@ -82,7 +85,7 @@ public class PlayState extends State {
 
             if(cam.position.x - (cam.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth())
             {
-                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + tubeSpacing) * tubeCount));
             }
 
             if(tube.collides(bird.getBounds()))

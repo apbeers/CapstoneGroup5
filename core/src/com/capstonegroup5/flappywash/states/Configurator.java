@@ -22,10 +22,18 @@ import io.keen.client.java.KeenProject;
 
 public class Configurator {
 
-    private static final int minTubeSpacing = 80;
-    private static final int maxTubeSpacing = 160;
+    private static final int minTubeSpacing = 50;
+    private static final int maxTubeSpacing = 200;
     private static final int minTubeCount = 1;
-    private static final int maxTubeCount = 8;
+    private static final int maxTubeCount = 12;
+    private static final int minFluctuation = 50;
+    private static final int maxFluxtuation = 200;
+    private static final int minTubeGap = 100;
+    private static final int maxtubeGap = 300;
+    private static final int minBirdGravity = 6;
+    private static final int maxBirdGravity = 18;
+    private static final int minbirdMovement = 50;
+    private static final int maxBirdMovement = 150;
 
     private static Map<String, Object> event = new HashMap<String, Object>();
 
@@ -64,24 +72,44 @@ public class Configurator {
         return configurations.get(themeIndex).getBg();
     }
 
-    public String getBgFilepath() {
-        return  configurations.get(themeIndex).getBgPath();
-    }
-
-    public String getGroundFilepath() {
-        return configurations.get(themeIndex).getGroundPath();
-    }
-
     public Texture getGround() {
         return configurations.get(themeIndex).getGround();
     }
 
     public int getTubeSpacing() {
-        return 0;
+        int tubeSpacing = new Random().nextInt((maxTubeSpacing - minTubeSpacing) + 1) + minTubeSpacing;
+        instance.addEvent("Tube Spacing", Integer.toString(tubeSpacing) );
+        return tubeSpacing;
     }
 
     public int getTubeCount() {
-        return 0;
+        int tubeCount = new Random().nextInt((maxTubeCount - minTubeCount) + 1) + minTubeCount;
+        instance.addEvent("Tube Count", Integer.toString(tubeCount) );
+        return tubeCount;
+    }
+
+    public int getTubeFluctuation() {
+        int fluctuation = new Random().nextInt((maxFluxtuation - minFluctuation) + 1) + minFluctuation;
+        instance.addEvent("Tube Fluctuation", Integer.toString(fluctuation) );
+        return fluctuation;
+    }
+
+    public int getTubeGap() {
+        int tubeGap = new Random().nextInt((maxtubeGap - minTubeGap) + 1) + minTubeGap;
+        instance.addEvent("Tube Gap", Integer.toString(tubeGap) );
+        return tubeGap;
+    }
+
+    public int getBirdGravity() {
+        int birdGravity = new Random().nextInt((maxBirdGravity - minBirdGravity) + 1) + minBirdGravity;
+        instance.addEvent("Bird Gravity", Integer.toString(birdGravity) );
+        return birdGravity;
+    }
+
+    public int getBirdMovement() {
+        int birdMovement = new Random().nextInt((maxBirdMovement - minbirdMovement) + 1) + minbirdMovement;
+        instance.addEvent("Bird Movement", Integer.toString(birdMovement) );
+        return birdMovement;
     }
 
     public void addEvent(String key, String value) {
@@ -94,4 +122,3 @@ public class Configurator {
         event.clear();
     }
 }
-
