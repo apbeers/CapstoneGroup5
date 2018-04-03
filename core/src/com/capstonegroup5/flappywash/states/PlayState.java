@@ -53,9 +53,6 @@ public class PlayState extends State {
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth /2, GROUND_Y_OFFSET);
         groundPos2 = new Vector2((cam.position.x - cam.viewportWidth /2) + ground.getWidth(), GROUND_Y_OFFSET);
 
-        event.put("Background Image", configurator.getBgFilepath());
-        event.put("Ground Image", configurator.getGroundFilepath());
-
         tubes = new Array<Tube>();
 
         for(int i = 1; i <= TUBE_COUNT; i++)
@@ -70,12 +67,7 @@ public class PlayState extends State {
             bird.jump();
     }
 
-    protected void sendData() {
 
-        // Add it to the "purchases" collection in your Keen Project.
-        KeenClient.client().addEvent("Game Statistics", event);
-        event.clear();
-    }
 
     @Override
     public void update(float dt) {
@@ -127,10 +119,9 @@ public class PlayState extends State {
     @Override
     public void dispose() {
 
-
         long playTime = System.currentTimeMillis() - starTime;
-        event.put("Play Time", String.valueOf(playTime));
-        sendData();
+        configurator.addEvent("Play Time", String.valueOf(playTime));
+        configurator.sendData();
 
         bg.dispose();
         bird.dispose();
