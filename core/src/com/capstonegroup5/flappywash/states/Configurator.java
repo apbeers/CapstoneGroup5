@@ -50,7 +50,7 @@ public class Configurator {
         KeenProject project = new KeenProject("5a9eabf6c9e77c00018ed78b", "F4B1E0FAB90CF908CC43F7B6C4DFB6AEC4D19EA05693878493F2D0EAAA3003B5E29D1836BA98C3C2C6350E39A448D9277523F1B05F0251F725798AA2E2592C6C9532F8BDF679CE361D82DB94DDAED478FBC4E6E44C8C82BA0C018DD54C2BF6EB", null);
         KeenClient.client().setDefaultProject(project);
 
-        configurations.add(new Configuration("b1.png", "ground.png"));
+        configurations.add(new Configuration("bg1.png", "ground.png"));
         configurations.add(new Configuration("bg2.png", "ground.png"));
         configurations.add(new Configuration("bg3.png","ground.png"));
         configurations.add(new Configuration("bg4.png","ground.png"));
