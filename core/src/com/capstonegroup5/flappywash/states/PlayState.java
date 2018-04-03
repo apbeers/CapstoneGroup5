@@ -21,15 +21,15 @@ import io.keen.client.java.KeenProject;
  */
 
 public class PlayState extends State {
-    private static final int TUBE_SPACING = 125;
-    private static final int TUBE_COUNT = 4;
+    private static int tubeSpacing;
+    private static int tubeCount;
     private static final int GROUND_Y_OFFSET = -50;
 
     KeenClient client = new JavaKeenClientBuilder().build();
 // Android Client:
 // KeenClient client = new AndroidKeenClientBuilder(this).build();
 
-    private TextureLoader textureLoader;
+    private Configurator configurator = Configurator.getInstance();
     private Bird bird;
     private Texture bg;
     private Texture ground;
@@ -48,21 +48,19 @@ public class PlayState extends State {
 
         starTime = System.currentTimeMillis();
 
-        textureLoader = new TextureLoader();
+        tubeSpacing = configurator.getTubeSpacing();
+        tubeCount = configurator.getTubeCount();
 
-        bg = textureLoader.getBg();
-        ground = textureLoader.getGround();
+        bg = configurator.getBg();
+        ground = configurator.getGround();
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth /2, GROUND_Y_OFFSET);
         groundPos2 = new Vector2((cam.position.x - cam.viewportWidth /2) + ground.getWidth(), GROUND_Y_OFFSET);
 
-        event.put("Background Image",textureLoader.getBgFilepath());
-        event.put("Ground Image", textureLoader.getGroundFilepath());
-
         tubes = new Array<Tube>();
 
-        for(int i = 1; i <= TUBE_COUNT; i++)
+        for(int i = 1; i <= tubeCount; i++)
         {
-            tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
+            tubes.add(new Tube(i * (tubeSpacing + Tube.TUBE_WIDTH)));
         }
     }
 
@@ -72,12 +70,7 @@ public class PlayState extends State {
             bird.jump();
     }
 
-    protected void sendData() {
 
-        // Add it to the "purchases" collection in your Keen Project.
-        KeenClient.client().addEvent("Game Statistics", event);
-        event.clear();
-    }
 
     @Override
     public void update(float dt) {
@@ -92,7 +85,7 @@ public class PlayState extends State {
 
             if(cam.position.x - (cam.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth())
             {
-                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + tubeSpacing) * tubeCount));
             }
 
             if(tube.collides(bird.getBounds()))
@@ -129,10 +122,9 @@ public class PlayState extends State {
     @Override
     public void dispose() {
 
-
         long playTime = System.currentTimeMillis() - starTime;
-        event.put("Play Time", String.valueOf(playTime));
-        sendData();
+        configurator.addEvent("Play Time", String.valueOf(playTime));
+        configurator.sendData();
 
         bg.dispose();
         bird.dispose();

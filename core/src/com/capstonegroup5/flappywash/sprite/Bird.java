@@ -8,14 +8,16 @@ import java.awt.TextArea;
 import java.util.Vector;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.Gdx;
+import com.capstonegroup5.flappywash.states.Configurator;
 
 /**
  * Created by Natalia Baker on 2/1/2018.
  */
 
 public class Bird {
-    private static final int GRAVITY = -11;
-    private static final int MOVEMENT = 100;
+    private Configurator configurator = Configurator.getInstance();
+    private static int gravity;
+    private static int movement;
     private Vector3 position;
     private Vector3 velocity;
     private Rectangle bounds;
@@ -32,14 +34,17 @@ public class Bird {
       birdAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
       bounds = new Rectangle(x,y, texture.getWidth() / 3, texture.getHeight());
       flap = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
+
+      gravity = configurator.getBirdGravity() * -1;
+      movement = configurator.getBirdMovement();
     }
 
     public void update(float dt){
         birdAnimation.update(dt);
         if(position.y > 0)
-            velocity.add(0, GRAVITY, 0);
+            velocity.add(0, gravity, 0);
         velocity.scl(dt);
-        position.add(MOVEMENT * dt, velocity.y,0);
+        position.add(movement * dt, velocity.y,0);
         position.add(0, velocity.y, 0);
         if(position.y < 0)
             position.y = 0;
