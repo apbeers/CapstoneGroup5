@@ -50,10 +50,10 @@ public class Configurator {
         KeenProject project = new KeenProject("5a9eabf6c9e77c00018ed78b", "F4B1E0FAB90CF908CC43F7B6C4DFB6AEC4D19EA05693878493F2D0EAAA3003B5E29D1836BA98C3C2C6350E39A448D9277523F1B05F0251F725798AA2E2592C6C9532F8BDF679CE361D82DB94DDAED478FBC4E6E44C8C82BA0C018DD54C2BF6EB", null);
         KeenClient.client().setDefaultProject(project);
 
-        configurations.add(new Configuration("bg.png", "ground.png"));
-        configurations.add(new Configuration("bg1.png", "ground.png"));
-        configurations.add(new Configuration("bg2.png","ground.png"));
+        configurations.add(new Configuration("b1.png", "ground.png"));
+        configurations.add(new Configuration("bg2.png", "ground.png"));
         configurations.add(new Configuration("bg3.png","ground.png"));
+        configurations.add(new Configuration("bg4.png","ground.png"));
     }
 
     public static Configurator getInstance() {
@@ -62,8 +62,8 @@ public class Configurator {
         }
         themeIndex = new Random().nextInt((configurations.size()));
 
-        instance.addEvent("Background Image", configurations.get(themeIndex).getBgPath());
-        instance.addEvent("Ground Image", configurations.get(themeIndex).getGroundPath());
+        instance.addEvent("background_image", configurations.get(themeIndex).getBgPath());
+        instance.addEvent("ground_image", configurations.get(themeIndex).getGroundPath());
 
         return instance;
     }
@@ -78,37 +78,37 @@ public class Configurator {
 
     public int getTubeSpacing() {
         int tubeSpacing = new Random().nextInt((maxTubeSpacing - minTubeSpacing) + 1) + minTubeSpacing;
-        instance.addEvent("Tube Spacing", Integer.toString(tubeSpacing) );
+        instance.addEvent("tube_spacing", Integer.toString(tubeSpacing) );
         return tubeSpacing;
     }
 
     public int getTubeCount() {
         int tubeCount = new Random().nextInt((maxTubeCount - minTubeCount) + 1) + minTubeCount;
-        instance.addEvent("Tube Count", Integer.toString(tubeCount) );
+        instance.addEvent("tube_count", Integer.toString(tubeCount) );
         return tubeCount;
     }
 
     public int getTubeFluctuation() {
         int fluctuation = new Random().nextInt((maxFluxtuation - minFluctuation) + 1) + minFluctuation;
-        instance.addEvent("Tube Fluctuation", Integer.toString(fluctuation) );
+        instance.addEvent("tube_fluctuation", Integer.toString(fluctuation) );
         return fluctuation;
     }
 
     public int getTubeGap() {
         int tubeGap = new Random().nextInt((maxtubeGap - minTubeGap) + 1) + minTubeGap;
-        instance.addEvent("Tube Gap", Integer.toString(tubeGap) );
+        instance.addEvent("tube_gap", Integer.toString(tubeGap) );
         return tubeGap;
     }
 
     public int getBirdGravity() {
         int birdGravity = new Random().nextInt((maxBirdGravity - minBirdGravity) + 1) + minBirdGravity;
-        instance.addEvent("Bird Gravity", Integer.toString(birdGravity) );
+        instance.addEvent("bird_gravity", Integer.toString(birdGravity) );
         return birdGravity;
     }
 
     public int getBirdMovement() {
         int birdMovement = new Random().nextInt((maxBirdMovement - minbirdMovement) + 1) + minbirdMovement;
-        instance.addEvent("Bird Movement", Integer.toString(birdMovement) );
+        instance.addEvent("bird_movement", Integer.toString(birdMovement) );
         return birdMovement;
     }
 
@@ -118,7 +118,7 @@ public class Configurator {
 
     public void sendData() {
 
-        KeenClient.client().addEvent("Game Statistics", event);
+        KeenClient.client().addEvent("game_statistics", event);
         event.clear();
     }
 }

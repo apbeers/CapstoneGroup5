@@ -123,7 +123,7 @@ public class PlayState extends State {
     public void dispose() {
 
         long playTime = System.currentTimeMillis() - starTime;
-        configurator.addEvent("Play Time", String.valueOf(playTime));
+        configurator.addEvent("play_time", String.valueOf(playTime));
         configurator.sendData();
 
         bg.dispose();
