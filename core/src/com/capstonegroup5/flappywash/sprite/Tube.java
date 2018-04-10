@@ -25,14 +25,14 @@ public class Tube {
     private Rectangle boundsTop, boundsBot;
     private Random rand;
 
-    public Tube(float x)
-    {
+    public Tube(float x) {
 
         fluctuation = configurator.getTubeFluctuation();
         tubeGap = configurator.getTubeGap();
 
-        topTube = new Texture("toptube.png");
-        bottomTube = new Texture("bottomtube.png");
+        topTube = configurator.getTopTube();
+        bottomTube = configurator.getBottomTube();
+
         rand = new Random();
 
         posTopTube = new Vector2(x, rand.nextInt(fluctuation) + tubeGap + LOWEST_OPENING);
@@ -58,21 +58,18 @@ public class Tube {
         return posBotTube;
     }
 
-    public void reposition(float x)
-    {
+    public void reposition(float x) {
         posTopTube.set(x, rand.nextInt(fluctuation) + tubeGap + LOWEST_OPENING);
         posBotTube.set(x, posTopTube.y - tubeGap - bottomTube.getHeight());
         boundsTop.setPosition(posTopTube.x, posTopTube.y);
         boundsBot.setPosition(posBotTube.x, posBotTube.y);
     }
 
-    public boolean collides(Rectangle player)
-    {
+    public boolean collides(Rectangle player) {
         return player.overlaps(boundsTop) || player.overlaps(boundsBot);
     }
 
-    public void dispose()
-    {
+    public void dispose() {
         topTube.dispose();
         bottomTube.dispose();
     }

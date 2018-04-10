@@ -36,7 +36,7 @@ public class PlayState extends State {
     private Vector2 groundPos1, groundPos2;
     private Map<String, Object> event = new HashMap<String, Object>();
     private Array<Tube> tubes;
-    private long starTime;
+    private long startTime;
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
@@ -46,7 +46,7 @@ public class PlayState extends State {
         KeenProject project = new KeenProject("5a9eabf6c9e77c00018ed78b", "F4B1E0FAB90CF908CC43F7B6C4DFB6AEC4D19EA05693878493F2D0EAAA3003B5E29D1836BA98C3C2C6350E39A448D9277523F1B05F0251F725798AA2E2592C6C9532F8BDF679CE361D82DB94DDAED478FBC4E6E44C8C82BA0C018DD54C2BF6EB", null);
         KeenClient.client().setDefaultProject(project);
 
-        starTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis();
 
         tubeSpacing = configurator.getTubeSpacing();
         tubeCount = configurator.getTubeCount();
@@ -76,6 +76,7 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
         updateGround();
+
         bird.update(dt);
         cam.position.x = bird.getPosition().x + 80;
 
@@ -94,8 +95,14 @@ public class PlayState extends State {
             }
         }
 
-        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET)
+        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET) {
             gsm.set(new PlayState(gsm));
+        }
+
+        if (System.currentTimeMillis() - startTime > 30000) {
+            gsm.set(new PlayState(gsm));
+        }
+
         cam.update();
 
     }
@@ -122,7 +129,7 @@ public class PlayState extends State {
     @Override
     public void dispose() {
 
-        long playTime = System.currentTimeMillis() - starTime;
+        long playTime = System.currentTimeMillis() - startTime;
         configurator.addEvent("play_time", String.valueOf(playTime));
         configurator.sendData();
 

@@ -45,13 +45,14 @@ public class Configurator {
         KeenProject project = new KeenProject("5a9eabf6c9e77c00018ed78b", "F4B1E0FAB90CF908CC43F7B6C4DFB6AEC4D19EA05693878493F2D0EAAA3003B5E29D1836BA98C3C2C6350E39A448D9277523F1B05F0251F725798AA2E2592C6C9532F8BDF679CE361D82DB94DDAED478FBC4E6E44C8C82BA0C018DD54C2BF6EB", null);
         KeenClient.client().setDefaultProject(project);
 
-        configurations.add(new Configuration("bg1.png", "ground.png"));
-        configurations.add(new Configuration("bg2.png", "ground.png"));
-        configurations.add(new Configuration("bg3.png","ground.png"));
-        configurations.add(new Configuration("bg4.png","ground.png"));
+        configurations.add(new Configuration("bg1.png", "ground.png", "toptube2.png", "bottomtube2.png", "birdanimation.png"));
+        configurations.add(new Configuration("bg2.png", "ground.png", "toptube2.png", "bottomtube2.png", "birdanimation.png"));
+        configurations.add(new Configuration("bg3.png","ground.png", "toptube2.png", "bottomtube2.png", "pooanimation.png"));
+        configurations.add(new Configuration("bg4.png","ground.png", "toptube2.png", "bottomtube2.png", "bubbleanimation.png"));
     }
 
     public static Configurator getInstance() {
+
         if (instance == null) {
             instance = new Configurator();
         }
@@ -106,6 +107,12 @@ public class Configurator {
         instance.addEvent("bird_movement", Integer.toString(birdMovement) );
         return birdMovement;
     }
+
+    public Texture getTopTube() { return configurations.get(themeIndex).getTopTube(); }
+
+    public Texture getBottomTube() { return configurations.get(themeIndex).getBottomTube(); }
+
+    public Texture getCharater() {return  configurations.get(themeIndex).getCharacter(); }
 
     public void addEvent(String key, String value) {
         event.put(key, value);
