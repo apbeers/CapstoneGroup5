@@ -12,12 +12,14 @@ public class Configuration {
     private String groundPath;
     private String topTubePath;
     private String bottomTubePath;
+    private String characterPath;
 
-    public Configuration(String bgPath, String groundPath, String topTubePath, String bottomTubePath) {
+    public Configuration(String bgPath, String groundPath, String topTubePath, String bottomTubePath, String characterPath) {
         this.bgPath = bgPath;
         this.groundPath = groundPath;
         this.topTubePath = topTubePath;
         this.bottomTubePath = bottomTubePath;
+        this.characterPath = characterPath;
     }
 
     public Texture getBg() {
@@ -39,4 +41,6 @@ public class Configuration {
     public Texture getTopTube() { return new Texture(topTubePath); }
 
     public Texture getBottomTube() { return new Texture(bottomTubePath); }
+
+    public Texture getCharacter() { return new Texture(characterPath); }
 }
