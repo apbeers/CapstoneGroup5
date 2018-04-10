@@ -76,11 +76,7 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
         updateGround();
-        /*
-        if (System.currentTimeMillis() - startTime > 2000) {
-            dispose();
-        }
-        */
+
         bird.update(dt);
         cam.position.x = bird.getPosition().x + 80;
 
@@ -99,8 +95,14 @@ public class PlayState extends State {
             }
         }
 
-        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET)
+        if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET) {
             gsm.set(new PlayState(gsm));
+        }
+
+        if (System.currentTimeMillis() - startTime > 30000) {
+            gsm.set(new PlayState(gsm));
+        }
+
         cam.update();
 
     }
