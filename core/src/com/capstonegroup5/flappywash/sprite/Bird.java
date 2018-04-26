@@ -42,29 +42,42 @@ public class Bird {
 
         System.out.println(position.y);
 
-        if (position.y <= 80 && velocity.y < 0) {
-            velocity.add(0,0,0);
-            velocity.scl(dt);
-            position.add(movement * dt, 0,0);
-            position.add(0, 0, 0);
-            if(position.y < 0)
-                position.y = 0;
+        if (configurator.getGameMode()) {
+            if (position.y <= 80 && velocity.y < 0) {
+                velocity.add(0,0,0);
+                velocity.scl(dt);
+                position.add(movement * dt, 0,0);
+                position.add(0, 0, 0);
+                if(position.y < 0)
+                    position.y = 0;
 
-            velocity.scl(1/dt);
-            bounds.setPosition(position.x, position.y);
+                velocity.scl(1/dt);
+                bounds.setPosition(position.x, position.y);
+            }
+            else if(position.y > 0) {
+                velocity.add(0, gravity, 0);
+                velocity.scl(dt);
+                position.add(movement * dt, velocity.y,0);
+                position.add(0, velocity.y, 0);
+                if(position.y < 0)
+                    position.y = 0;
+
+                velocity.scl(1/dt);
+                bounds.setPosition(position.x, position.y);
+            }
+        } else {
+            if(position.y > 0) {
+                velocity.add(0, gravity, 0);
+                velocity.scl(dt);
+                position.add(movement * dt, velocity.y,0);
+                position.add(0, velocity.y, 0);
+                if(position.y < 0)
+                    position.y = 0;
+
+                velocity.scl(1/dt);
+                bounds.setPosition(position.x, position.y);
+            }
         }
-        else if(position.y > 0) {
-            velocity.add(0, gravity, 0);
-            velocity.scl(dt);
-            position.add(movement * dt, velocity.y,0);
-            position.add(0, velocity.y, 0);
-            if(position.y < 0)
-                position.y = 0;
-
-            velocity.scl(1/dt);
-            bounds.setPosition(position.x, position.y);
-        }
-
     }
 
     public Vector3 getPosition() {
@@ -76,8 +89,14 @@ public class Bird {
     }
 
     public void jump(){
-       velocity.y = 225;
-       flap.play(0.5f);
+        if (configurator.getGameMode()) {
+            if (position.y <= 80) {
+                velocity.y = 225;
+            }
+        } else {
+            velocity.y = 225;
+        }
+        flap.play(0.5f);
     }
 
     public Rectangle getBounds()

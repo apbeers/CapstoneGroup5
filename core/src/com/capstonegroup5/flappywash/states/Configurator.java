@@ -17,6 +17,7 @@ import io.keen.client.java.KeenProject;
 
 public class Configurator {
 
+    private boolean groundBird = true;
     private static final int minTubeSpacing = 50;
     private static final int maxTubeSpacing = 200;
     private static final int minTubeCount = 1;
@@ -72,40 +73,73 @@ public class Configurator {
         return configurations.get(themeIndex).getGround();
     }
 
+    public void setGameModeRandomly() {
+        groundBird = new Random().nextBoolean();
+        //groundBird = true;
+    }
+
+    public boolean getGameMode() {
+        return groundBird;
+    }
+
     public int getTubeSpacing() {
-        int tubeSpacing = new Random().nextInt((maxTubeSpacing - minTubeSpacing) + 1) + minTubeSpacing;
-        instance.addEvent("tube_spacing", Integer.toString(tubeSpacing) );
-        return tubeSpacing;
+        if (groundBird) {
+            return 200;
+        } else {
+            int tubeSpacing = new Random().nextInt((maxTubeSpacing - minTubeSpacing) + 1) + minTubeSpacing;
+            instance.addEvent("tube_spacing", Integer.toString(tubeSpacing) );
+            return tubeSpacing;
+        }
     }
 
     public int getTubeCount() {
-        int tubeCount = new Random().nextInt((maxTubeCount - minTubeCount) + 1) + minTubeCount;
-        instance.addEvent("tube_count", Integer.toString(tubeCount) );
-        return tubeCount;
+        if (groundBird) {
+            return 2;
+        } else {
+            int tubeCount = new Random().nextInt((maxTubeCount - minTubeCount) + 1) + minTubeCount;
+            instance.addEvent("tube_count", Integer.toString(tubeCount) );
+            return tubeCount;
+        }
     }
 
     public int getTubeFluctuation() {
-        int fluctuation = new Random().nextInt((maxFluxtuation - minFluctuation) + 1) + minFluctuation;
-        instance.addEvent("tube_fluctuation", Integer.toString(fluctuation) );
-        return fluctuation;
+        if (groundBird) {
+            return 100;
+        } else {
+            int fluctuation = new Random().nextInt((maxFluxtuation - minFluctuation) + 1) + minFluctuation;
+            instance.addEvent("tube_fluctuation", Integer.toString(fluctuation) );
+            return fluctuation;
+        }
     }
 
     public int getTubeGap() {
-        int tubeGap = new Random().nextInt((maxtubeGap - minTubeGap) + 1) + minTubeGap;
-        instance.addEvent("tube_gap", Integer.toString(tubeGap) );
-        return tubeGap;
+        if (groundBird) {
+            return 250;
+        } else {
+            int tubeGap = new Random().nextInt((maxtubeGap - minTubeGap) + 1) + minTubeGap;
+            instance.addEvent("tube_gap", Integer.toString(tubeGap) );
+            return tubeGap;
+        }
     }
 
     public int getBirdGravity() {
-        int birdGravity = new Random().nextInt((maxBirdGravity - minBirdGravity) + 1) + minBirdGravity;
-        instance.addEvent("bird_gravity", Integer.toString(birdGravity) );
-        return birdGravity;
+        if (groundBird) {
+            return 5;
+        } else {
+            int birdGravity = new Random().nextInt((maxBirdGravity - minBirdGravity) + 1) + minBirdGravity;
+            instance.addEvent("bird_gravity", Integer.toString(birdGravity) );
+            return birdGravity;
+        }
     }
 
     public int getBirdMovement() {
-        int birdMovement = new Random().nextInt((maxBirdMovement - minbirdMovement) + 1) + minbirdMovement;
-        instance.addEvent("bird_movement", Integer.toString(birdMovement) );
-        return birdMovement;
+        if (groundBird) {
+            return 100;
+        } else {
+            int birdMovement = new Random().nextInt((maxBirdMovement - minbirdMovement) + 1) + minbirdMovement;
+            instance.addEvent("bird_movement", Integer.toString(birdMovement) );
+            return birdMovement;
+        }
     }
 
     public Texture getTopTube() { return configurations.get(themeIndex).getTopTube(); }
@@ -117,7 +151,6 @@ public class Configurator {
     public void addEvent(String key, String value) {
         event.put(key, value);
     }
-
 
     public void sendData() {
 

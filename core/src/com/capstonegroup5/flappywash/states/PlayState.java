@@ -25,7 +25,7 @@ public class PlayState extends State {
     private static int tubeCount;
     private static final int GROUND_Y_OFFSET = -50;
 
-    KeenClient client = new JavaKeenClientBuilder().build();
+    private KeenClient client = new JavaKeenClientBuilder().build();
 // Android Client:
 // KeenClient client = new AndroidKeenClientBuilder(this).build();
 
@@ -40,7 +40,13 @@ public class PlayState extends State {
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
-        bird = new Bird(50, 300);
+        configurator.setGameModeRandomly();
+        if (configurator.getGameMode()) {
+            bird = new Bird(50, 80);
+        } else {
+            bird = new Bird(50, 300);
+        }
+
         cam.setToOrtho(false, FlappyWash.WIDTH/2, FlappyWash.HEIGHT/2);
         KeenClient.initialize(client);
         KeenProject project = new KeenProject("5a9eabf6c9e77c00018ed78b", "F4B1E0FAB90CF908CC43F7B6C4DFB6AEC4D19EA05693878493F2D0EAAA3003B5E29D1836BA98C3C2C6350E39A448D9277523F1B05F0251F725798AA2E2592C6C9532F8BDF679CE361D82DB94DDAED478FBC4E6E44C8C82BA0C018DD54C2BF6EB", null);
@@ -69,8 +75,6 @@ public class PlayState extends State {
         if(Gdx.input.justTouched())
             bird.jump();
     }
-
-
 
     @Override
     public void update(float dt) {
