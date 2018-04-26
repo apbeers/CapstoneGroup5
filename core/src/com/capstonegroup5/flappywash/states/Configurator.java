@@ -79,6 +79,11 @@ public class Configurator {
 
     public void setGameModeRandomly() {
         groundBird = new Random().nextBoolean();
+        if (groundBird) {
+            addEvent("game_mode", "ground");
+        } else {
+            addEvent("game_mode", "air");
+        }
         //groundBird = true;
     }
 
