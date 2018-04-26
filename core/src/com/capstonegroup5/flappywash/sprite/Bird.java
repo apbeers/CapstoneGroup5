@@ -43,7 +43,7 @@ public class Bird {
         System.out.println(position.y);
 
         if (configurator.getGameMode()) {
-            if (position.y <= 80 && velocity.y < 0) {
+            if (position.y <= 75 && velocity.y < 0) {
                 velocity.add(0,0,0);
                 velocity.scl(dt);
                 position.add(movement * dt, 0,0);
