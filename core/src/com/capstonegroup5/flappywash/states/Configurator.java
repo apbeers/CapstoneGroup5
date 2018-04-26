@@ -17,6 +17,8 @@ import io.keen.client.java.KeenProject;
 
 public class Configurator {
 
+    private boolean groundBird = true;
+    private long startTime;
     private static final int minTubeSpacing = 50;
     private static final int maxTubeSpacing = 200;
     private static final int minTubeCount = 1;
@@ -45,10 +47,13 @@ public class Configurator {
         KeenProject project = new KeenProject("5a9eabf6c9e77c00018ed78b", "F4B1E0FAB90CF908CC43F7B6C4DFB6AEC4D19EA05693878493F2D0EAAA3003B5E29D1836BA98C3C2C6350E39A448D9277523F1B05F0251F725798AA2E2592C6C9532F8BDF679CE361D82DB94DDAED478FBC4E6E44C8C82BA0C018DD54C2BF6EB", null);
         KeenClient.client().setDefaultProject(project);
 
-        configurations.add(new Configuration("bg1.png", "ground.png", "toptube2.png", "bottomtube2.png", "birdanimation.png"));
-        configurations.add(new Configuration("bg2.png", "ground.png", "toptube2.png", "bottomtube2.png", "birdanimation.png"));
+        configurations.add(new Configuration("bg1.png", "ground.png", "toptube2.png", "bottomtube2.png", "purplebubble.png"));
+        configurations.add(new Configuration("bg2.png", "ground.png", "toptube2.png", "bottomtube2.png", "greenbubble.png"));
         configurations.add(new Configuration("bg3.png","ground.png", "toptube2.png", "bottomtube2.png", "pooanimation.png"));
-        configurations.add(new Configuration("bg4.png","ground.png", "toptube2.png", "bottomtube2.png", "bubbleanimation.png"));
+        configurations.add(new Configuration("bg4.png","ground.png", "toptube2.png", "bottomtube2.png", "yellowbubble.png"));
+        configurations.add(new Configuration("bg2.png", "ground.png", "toptube2.png", "bottomtube2.png", "bluebubble.png"));
+        configurations.add(new Configuration("bg3.png","ground.png", "toptube2.png", "bottomtube2.png", "redbubble.png"));
+        configurations.add(new Configuration("bg4.png","ground.png", "toptube2.png", "bottomtube2.png", "orangebubble.png"));
     }
 
     public static Configurator getInstance() {
@@ -72,47 +77,91 @@ public class Configurator {
         return configurations.get(themeIndex).getGround();
     }
 
+    public void setGameModeRandomly() {
+        groundBird = new Random().nextBoolean();
+        if (groundBird) {
+            addEvent("game_mode", "ground");
+        } else {
+            addEvent("game_mode", "air");
+        }
+        //groundBird = true;
+    }
+
+    public boolean getGameMode() {
+        return groundBird;
+    }
+
     public int getTubeSpacing() {
-        int tubeSpacing = new Random().nextInt((maxTubeSpacing - minTubeSpacing) + 1) + minTubeSpacing;
-        instance.addEvent("tube_spacing", Integer.toString(tubeSpacing) );
-        return tubeSpacing;
+        if (groundBird) {
+            return 200;
+        } else {
+            int tubeSpacing = new Random().nextInt((maxTubeSpacing - minTubeSpacing) + 1) + minTubeSpacing;
+            instance.addEvent("tube_spacing", Integer.toString(tubeSpacing) );
+            return tubeSpacing;
+        }
     }
 
     public int getTubeCount() {
-        int tubeCount = new Random().nextInt((maxTubeCount - minTubeCount) + 1) + minTubeCount;
-        instance.addEvent("tube_count", Integer.toString(tubeCount) );
-        return tubeCount;
+        if (groundBird) {
+            return 2;
+        } else {
+            int tubeCount = new Random().nextInt((maxTubeCount - minTubeCount) + 1) + minTubeCount;
+            instance.addEvent("tube_count", Integer.toString(tubeCount) );
+            return tubeCount;
+        }
     }
 
     public int getTubeFluctuation() {
-        int fluctuation = new Random().nextInt((maxFluxtuation - minFluctuation) + 1) + minFluctuation;
-        instance.addEvent("tube_fluctuation", Integer.toString(fluctuation) );
-        return fluctuation;
+        if (groundBird) {
+            return 100;
+        } else {
+            int fluctuation = new Random().nextInt((maxFluxtuation - minFluctuation) + 1) + minFluctuation;
+            instance.addEvent("tube_fluctuation", Integer.toString(fluctuation) );
+            return fluctuation;
+        }
     }
 
     public int getTubeGap() {
-        int tubeGap = new Random().nextInt((maxtubeGap - minTubeGap) + 1) + minTubeGap;
-        instance.addEvent("tube_gap", Integer.toString(tubeGap) );
-        return tubeGap;
+        if (groundBird) {
+            return 250;
+        } else {
+            int tubeGap = new Random().nextInt((maxtubeGap - minTubeGap) + 1) + minTubeGap;
+            instance.addEvent("tube_gap", Integer.toString(tubeGap) );
+            return tubeGap;
+        }
     }
 
     public int getBirdGravity() {
-        int birdGravity = new Random().nextInt((maxBirdGravity - minBirdGravity) + 1) + minBirdGravity;
-        instance.addEvent("bird_gravity", Integer.toString(birdGravity) );
-        return birdGravity;
+        if (groundBird) {
+            return 5;
+        } else {
+            int birdGravity = new Random().nextInt((maxBirdGravity - minBirdGravity) + 1) + minBirdGravity;
+            instance.addEvent("bird_gravity", Integer.toString(birdGravity) );
+            return birdGravity;
+        }
     }
 
     public int getBirdMovement() {
-        int birdMovement = new Random().nextInt((maxBirdMovement - minbirdMovement) + 1) + minbirdMovement;
-        instance.addEvent("bird_movement", Integer.toString(birdMovement) );
-        return birdMovement;
+        if (groundBird) {
+            return 100;
+        } else {
+            int birdMovement = new Random().nextInt((maxBirdMovement - minbirdMovement) + 1) + minbirdMovement;
+            instance.addEvent("bird_movement", Integer.toString(birdMovement) );
+            return birdMovement;
+        }
     }
 
     public Texture getTopTube() { return configurations.get(themeIndex).getTopTube(); }
 
     public Texture getBottomTube() { return configurations.get(themeIndex).getBottomTube(); }
 
-    public Texture getCharater() {return  configurations.get(themeIndex).getCharacter(); }
+    public Texture getCharacter() {
+        if (getGameMode()) {
+            return new Texture("groundbubble.png");
+        } else {
+            return  configurations.get(themeIndex).getCharacter();
+        }
+    }
 
     public void addEvent(String key, String value) {
         event.put(key, value);
@@ -122,5 +171,13 @@ public class Configurator {
 
         KeenClient.client().addEvent("game_statistics", event);
         event.clear();
+    }
+
+    public void setStartTime() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public long getPlayTime() {
+        return System.currentTimeMillis() - startTime;
     }
 }
