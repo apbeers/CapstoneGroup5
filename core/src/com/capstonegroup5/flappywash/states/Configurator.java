@@ -18,6 +18,7 @@ import io.keen.client.java.KeenProject;
 public class Configurator {
 
     private boolean groundBird = true;
+    private long startTime;
     private static final int minTubeSpacing = 50;
     private static final int maxTubeSpacing = 200;
     private static final int minTubeCount = 1;
@@ -165,5 +166,13 @@ public class Configurator {
 
         KeenClient.client().addEvent("game_statistics", event);
         event.clear();
+    }
+
+    public void setStartTime() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public long getPlayTime() {
+        return System.currentTimeMillis() - startTime;
     }
 }

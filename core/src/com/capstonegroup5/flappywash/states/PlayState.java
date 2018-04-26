@@ -40,6 +40,7 @@ public class PlayState extends State {
 
     protected PlayState(GameStateManager gsm) {
         super(gsm);
+
         configurator.setGameModeRandomly();
         if (configurator.getGameMode()) {
             bird = new Bird(50, 80);
@@ -103,12 +104,11 @@ public class PlayState extends State {
             gsm.set(new PlayState(gsm));
         }
 
-        if (System.currentTimeMillis() - startTime > 30000) {
-            gsm.set(new PlayState(gsm));
+        if (configurator.getPlayTime() > 30000) {
+            gsm.set(new MenuState(gsm));
         }
 
         cam.update();
-
     }
 
     @Override
@@ -152,7 +152,5 @@ public class PlayState extends State {
 
         if(cam.position.x - (cam.viewportWidth / 2) > groundPos2.x + ground.getWidth())
             groundPos2.add(ground.getWidth() *2, 0);
-
-
     }
 }

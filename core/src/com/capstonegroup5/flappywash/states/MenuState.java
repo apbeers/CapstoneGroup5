@@ -13,6 +13,7 @@ public class MenuState extends State {
 
     private Texture background;
     private Texture playBtn;
+    private Configurator configurator = Configurator.getInstance();
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
@@ -24,6 +25,7 @@ public class MenuState extends State {
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
+            configurator.setStartTime();
             gsm.set(new PlayState(gsm));
         }
     }

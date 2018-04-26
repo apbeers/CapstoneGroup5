@@ -40,8 +40,6 @@ public class Bird {
     public void update(float dt){
         birdAnimation.update(dt);
 
-        System.out.println(position.y);
-
         if (configurator.getGameMode()) {
             if (position.y <= 75 && velocity.y < 0) {
                 velocity.add(0,0,0);
