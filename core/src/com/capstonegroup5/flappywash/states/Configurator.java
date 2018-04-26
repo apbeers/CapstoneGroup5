@@ -112,11 +112,12 @@ public class Configurator {
 
     public Texture getBottomTube() { return configurations.get(themeIndex).getBottomTube(); }
 
-    public Texture getCharater() {return  configurations.get(themeIndex).getCharacter(); }
+    public Texture getCharacter() {return  configurations.get(themeIndex).getCharacter(); }
 
     public void addEvent(String key, String value) {
         event.put(key, value);
     }
+
 
     public void sendData() {
 
