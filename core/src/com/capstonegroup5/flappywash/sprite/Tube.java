@@ -9,6 +9,8 @@ import java.util.Random;
 
 /**
  * Created by Alec on 2/3/2018.
+ *
+ * Creates and manages the tube objects in the level and handles some collision detection
  */
 
 public class Tube {
@@ -25,6 +27,7 @@ public class Tube {
     private Rectangle boundsTop, boundsBot;
     private Random rand;
 
+    // creates the top and bottom tubes
     public Tube(float x) {
 
         fluctuation = configurator.getTubeFluctuation();
@@ -58,6 +61,7 @@ public class Tube {
         return posBotTube;
     }
 
+    // handles moving the tubes across the screen as the game runs
     public void reposition(float x) {
         posTopTube.set(x, rand.nextInt(fluctuation) + tubeGap + LOWEST_OPENING);
         posBotTube.set(x, posTopTube.y - tubeGap - bottomTube.getHeight());
@@ -65,10 +69,12 @@ public class Tube {
         boundsBot.setPosition(posBotTube.x, posBotTube.y);
     }
 
+    // returns if the character has collided with a tube
     public boolean collides(Rectangle player) {
         return player.overlaps(boundsTop) || player.overlaps(boundsBot);
     }
 
+    // disposes of resources to prevent memory leaks
     public void dispose() {
         topTube.dispose();
         bottomTube.dispose();

@@ -2,6 +2,8 @@ package com.capstonegroup5.flappywash.states;
 
 /**
  * Created by andrew on 1/23/18.
+ *
+ * This abstract class enforces design rules for the various states in the game
  */
 
 import com.badlogic.gdx.graphics.OrthographicCamera;

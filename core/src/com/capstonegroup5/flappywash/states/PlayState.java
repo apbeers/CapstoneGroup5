@@ -18,6 +18,9 @@ import io.keen.client.java.KeenProject;
 
 /**
  * Created by andrew on 2/1/18.
+ *
+ * This is the state while the player is playing the game. It handles allocating the various
+ * elements on screen and transitioning states after collisions occur
  */
 
 public class PlayState extends State {
@@ -26,9 +29,8 @@ public class PlayState extends State {
     private static final int GROUND_Y_OFFSET = -50;
 
     private KeenClient client = new JavaKeenClientBuilder().build();
-// Android Client:
-// KeenClient client = new AndroidKeenClientBuilder(this).build();
 
+    // gets and instance of the configurator
     private Configurator configurator = Configurator.getInstance();
     private Bird bird;
     private Texture bg;
@@ -41,6 +43,7 @@ public class PlayState extends State {
     protected PlayState(GameStateManager gsm) {
         super(gsm);
 
+        // starts the bird on the ground or in the air based on the game mode chosen
         configurator.setGameModeRandomly();
         if (configurator.getGameMode()) {
             bird = new Bird(50, 80);
@@ -71,12 +74,15 @@ public class PlayState extends State {
         }
     }
 
+    // handles input
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched())
             bird.jump();
     }
 
+    // called on each frame to move objects across the screen and check for collisions, as well
+    // as checking play time
     @Override
     public void update(float dt) {
         handleInput();
@@ -85,6 +91,7 @@ public class PlayState extends State {
         bird.update(dt);
         cam.position.x = bird.getPosition().x + 80;
 
+        // loops through all of the thube to move them and check collisions
         for(int i = 0; i < tubes.size; i++)
         {
             Tube tube = tubes.get(i);
@@ -100,6 +107,7 @@ public class PlayState extends State {
             }
         }
 
+        // restarts the game if the bird touches the ground
         if(bird.getPosition().y <= ground.getHeight() + GROUND_Y_OFFSET) {
             gsm.set(new PlayState(gsm));
         }
@@ -111,6 +119,7 @@ public class PlayState extends State {
         cam.update();
     }
 
+    // draws elements on the screen
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
@@ -130,6 +139,8 @@ public class PlayState extends State {
         sb.end();
     }
 
+    // called when the level restarts
+    // disposes of resources and logs the playtime on that level
     @Override
     public void dispose() {
 
@@ -146,6 +157,7 @@ public class PlayState extends State {
         }
     }
 
+    // moves the ground horizontally across the screen
     private void updateGround() {
         if(cam.position.x - (cam.viewportWidth / 2) > groundPos1.x + ground.getWidth())
             groundPos1.add(ground.getWidth() *2, 0);

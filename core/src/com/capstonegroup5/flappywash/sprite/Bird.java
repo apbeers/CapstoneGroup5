@@ -10,6 +10,9 @@ import com.capstonegroup5.flappywash.states.Configurator;
 
 /**
  * Created by Natalia Baker on 2/1/2018.
+ *
+ * Handles the in-game character's behavior including gravity, velocity, collision detection.
+ * It also handles the multiple behaviors of the character during two different game styles
  */
 
 public class Bird {
@@ -25,6 +28,8 @@ public class Bird {
 
     private Texture bird;
 
+    //Creates the bird character using the Animation class, combines it with the sound effects,
+    // and adds it to the screen
     public Bird(int x, int y){
       position = new Vector3(x, y, 0);
       velocity = new Vector3(0, 0,0 );
@@ -37,9 +42,14 @@ public class Bird {
       movement = configurator.getBirdMovement();
     }
 
+    // gets called every frame to update the birds location. it can handle both game modes
     public void update(float dt){
         birdAnimation.update(dt);
 
+        // contains behavior for the main game mode, where the character moves along the ground
+        // and can only single-jump over obstacles. It does this by zeroing out the character's
+        // vertical veloicty when it appreaches the ground, and only allows the jump action
+        // if the bird is not in contact with the ground/
         if (configurator.getGameMode()) {
             if (position.y <= 75 && velocity.y < 0) {
                 velocity.add(0,0,0);
@@ -63,6 +73,9 @@ public class Bird {
                 velocity.scl(1/dt);
                 bounds.setPosition(position.x, position.y);
             }
+
+        // handles the gameplay that is similar to flappy-bird where the character is allowed to fly
+        // and dies if it hits the ground
         } else {
             if(position.y > 0) {
                 velocity.add(0, gravity, 0);
@@ -78,14 +91,17 @@ public class Bird {
         }
     }
 
+    // returns the character's 2d position
     public Vector3 getPosition() {
         return position;
     }
 
+    // returns the new texture for the character's animation
     public TextureRegion getTexture() {
         return birdAnimation.getFrame();
     }
 
+    // controls when the character is allowed to jump, and sets the velocity accordingly
     public void jump(){
         if (configurator.getGameMode()) {
             if (position.y <= 80) {
@@ -97,11 +113,13 @@ public class Bird {
         flap.play(0.5f);
     }
 
+    // returns the character's bounds for collision detection
     public Rectangle getBounds()
     {
         return bounds;
     }
 
+    // disposes of used resources to prevent memory leaks
     public void dispose() {
         texture.dispose();
         flap.dispose();

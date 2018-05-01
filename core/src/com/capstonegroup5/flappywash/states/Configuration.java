@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 /**
  * Created by andrew on 2/26/18.
+ *
+ * Contains various parameters for creating different randomly chosen levels
  */
 
 public class Configuration {
