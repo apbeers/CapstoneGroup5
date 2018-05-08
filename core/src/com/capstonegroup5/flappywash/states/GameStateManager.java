@@ -6,6 +6,8 @@ import java.util.Stack;
 
 /**
  * Created by andrew on 1/23/18.
+ *
+ * Manages a stack of two game states and switches between them
  */
 
 public class GameStateManager {

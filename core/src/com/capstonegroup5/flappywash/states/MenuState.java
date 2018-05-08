@@ -7,6 +7,8 @@ import com.capstonegroup5.flappywash.FlappyWash;
 
 /**
  * Created by andrew on 1/23/18.
+ *
+ * This state contains a play button and waits for user input before switching to start the game
  */
 
 public class MenuState extends State {
@@ -15,6 +17,7 @@ public class MenuState extends State {
     private Texture playBtn;
     private Configurator configurator = Configurator.getInstance();
 
+    // sets the camera and textures for the screen
     public MenuState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, FlappyWash.WIDTH/2, FlappyWash.HEIGHT/2);
@@ -22,6 +25,7 @@ public class MenuState extends State {
         playBtn = new Texture("playbtn.png");
     }
 
+    // waits for input anywhere on the screen
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
@@ -35,6 +39,7 @@ public class MenuState extends State {
         handleInput();
     }
 
+    // draws resources on the screen based on screen bounds
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
@@ -44,7 +49,7 @@ public class MenuState extends State {
         sb.end();
     }
 
-
+    // dispose of resources after state changes to prevent memory leaks
     public void dispose() {
         background.dispose();
         playBtn.dispose();

@@ -1,5 +1,10 @@
 package com.capstonegroup5.flappywash;
 
+/**
+ * This class handles initializing the game with the correct screen size, starting the background
+ * music, and creating a game state manager that is used throughout the game
+ */
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -22,6 +27,7 @@ public class FlappyWash extends ApplicationAdapter {
 	// adan: i was here
 
 	// This is Nat
+	// handles background music and create objects to manage the game
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -37,6 +43,7 @@ public class FlappyWash extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1,0,0,1);
 	}
 
+	// draw to screen
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -44,6 +51,7 @@ public class FlappyWash extends ApplicationAdapter {
 		gsm.render(batch);
 	}
 
+	// remove unused resources to prevent memory leaks
 	@Override
 	public void dispose() {
 		super.dispose();
